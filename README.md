@@ -78,8 +78,8 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1400px;
-  padding: 2rem 4rem;
+  max-width: 1800px;
+  padding: 2rem 3rem;
   position: relative;
   z-index: 1;
 }
@@ -114,11 +114,9 @@ body {
 .nav-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  gap: 4rem;
   margin-bottom: 4rem;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .nav-card {
@@ -173,12 +171,12 @@ body {
 }
 
 .card-content {
-  padding: 2.5rem;
+  padding: 3rem;
   text-align: center;
 }
 
 .nav-card h2 {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
   color: #2c3e50;
@@ -314,17 +312,17 @@ body {
   margin-top: 2rem;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .container {
     padding: 2rem 3rem;
   }
 
   .hero-title {
-    font-size: 4rem;
+    font-size: 4.5rem;
   }
 
   .nav-grid {
-    gap: 2rem;
+    gap: 3rem;
   }
 }
 
