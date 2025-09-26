@@ -58,10 +58,29 @@
 </div>
 
 <style>
+/* 重置Jekyll主题的宽度限制 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.container {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* 重置Jekyll主题的容器限制 */
+.site-header, .site-footer, .page-content {
+  max-width: none !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 body {
@@ -82,6 +101,7 @@ body {
   padding: 2rem 3rem;
   position: relative;
   z-index: 1;
+  margin: 0 auto;
 }
 
 .hero {
