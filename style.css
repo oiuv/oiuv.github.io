@@ -230,7 +230,6 @@ a:focus-visible, button:focus-visible, nav:focus-visible {
 }
 .footer > span > span { color: var(--lavender); }
 .filing { text-align: center; }
-.filing span { display: block; text-decoration: underline; text-underline-offset: .18em; }
 .filing:hover { color: var(--lavender); }
 .footer-art { display: flex; justify-self: end; gap: .26rem; }
 .footer-art i { width: .32rem; height: .32rem; background: #a18dbb; }
