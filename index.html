@@ -1,394 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>oiuv - 噢哎呦喂 · 个人项目导航</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1800px;
-            padding: 2rem 3rem;
-            position: relative;
-            z-index: 1;
-            margin: 0 auto;
-        }
-
-        .hero {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .hero-title {
-            font-size: 5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.95);
-            font-weight: 300;
-            letter-spacing: 0.05em;
-        }
-
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
-            margin-bottom: 4rem;
-            width: 100%;
-        }
-
-        .nav-card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            position: relative;
-        }
-
-        .nav-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 35px 70px rgba(0,0,0,0.2);
-        }
-
-        .card-bg {
-            height: 140px;
-            background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .card-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(102,126,234,0.2) 0%, rgba(118,75,162,0.2) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-card:hover .card-bg::before {
-            opacity: 1;
-        }
-
-        .card-icon {
-            font-size: 5rem;
-            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
-            transition: transform 0.3s ease;
-        }
-
-        .nav-card:hover .card-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .card-content {
-            padding: 3rem;
-            text-align: center;
-        }
-
-        .nav-card h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-            letter-spacing: -0.01em;
-        }
-
-        .nav-card p {
-            font-size: 1.2rem;
-            color: #5a6c7d;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-
-        .card-features {
-            display: flex;
-            gap: 0.8rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .feature-tag {
-            background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
-            color: #667eea;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid rgba(102,126,234,0.2);
-        }
-
-        .nav-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 14px 32px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 28px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-btn:hover::before {
-            left: 100%;
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-arrow {
-            transition: transform 0.3s ease;
-        }
-
-        .nav-btn:hover .btn-arrow {
-            transform: translateX(4px);
-        }
-
-        .floating-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape-1 {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .shape-2 {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 2s;
-        }
-
-        .shape-3 {
-            width: 60px;
-            height: 60px;
-            bottom: 20%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-            }
-        }
-
-        .footer {
-            text-align: center;
-            color: rgba(255,255,255,0.8);
-            font-size: 1rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 1400px) {
-            .container {
-                padding: 2rem 3rem;
-            }
-
-            .hero-title {
-                font-size: 4.5rem;
-            }
-
-            .nav-grid {
-                gap: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem 2rem;
-            }
-
-            .hero-title {
-                font-size: 3rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .nav-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .nav-card {
-                margin: 0 1rem;
-            }
-
-            .card-content {
-                padding: 2rem;
-            }
-
-            .nav-card h2 {
-                font-size: 1.8rem;
-            }
-
-            .nav-card p {
-                font-size: 1.1rem;
-            }
-
-            .card-icon {
-                font-size: 4rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .nav-card {
-                margin: 0 0.5rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101017">
+  <meta name="description" content="oiuv 的个人主页。逛逛我的 GitHub，在游戏常春藤重温经典，或到 MUD.REN 走一趟文字江湖。">
+  <title>oiuv · 噢哎呦喂的个人主页</title>
+  <link rel="icon" href="./assets/companion.svg" type="image/svg+xml">
+  <link rel="preload" href="./assets/oiuv-pixel.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <div class="container">
-        <div class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    <span class="gradient-text">oiuv</span>
-                </h1>
-                <p class="hero-subtitle">噢哎呦喂 · 个人项目导航</p>
-            </div>
-        </div>
-
-        <div class="nav-grid">
-            <div class="nav-card">
-                <div class="card-bg">
-                    <div class="card-icon">🎮</div>
-                </div>
-                <div class="card-content">
-                    <h2>Mud.Ren</h2>
-                    <p>MUD游戏玩家社区，提供专业的LPC开发教程和完善的efun函数文档。这里有开源游戏：炎黄群侠传、灵境行者、诡秘之主，以及经典的炎黄英雄榜MUD世界。</p>
-                    <div class="card-features">
-                        <span class="feature-tag">MUD游戏</span>
-                        <span class="feature-tag">开发教程</span>
-                        <span class="feature-tag">LPC文档</span>
-                    </div>
-                    <a href="https://mud.ren" class="nav-btn" target="_blank">
-                        <span class="btn-text">访问网站</span>
-                        <span class="btn-arrow">→</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="nav-card">
-                <div class="card-bg">
-                    <div class="card-icon">🌿</div>
-                </div>
-                <div class="card-content">
-                    <h2>游戏常春藤</h2>
-                    <p>始于爱好，终于情怀。提供魔兽世界3.3.5、魔力宝贝7.0、我的世界等经典游戏的开源服务器。长期稳定运行，纯公益性质，无商业化运营，为志同道合的玩家打造纯净游戏乐园。</p>
-                    <div class="card-features">
-                        <span class="feature-tag">魔兽世界</span>
-                        <span class="feature-tag">魔力宝贝</span>
-                        <span class="feature-tag">我的世界</span>
-                        <span class="feature-tag">公益服</span>
-                    </div>
-                    <a href="https://gameivy.com" class="nav-btn" target="_blank">
-                        <span class="btn-text">访问网站</span>
-                        <span class="btn-arrow">→</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-        </div>
-
-        <div class="footer">
-            <p>© 2024 oiuv | 用心创造每一个项目</p>
-        </div>
+<body id="top">
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="grid" viewBox="0 0 24 24">
+      <path d="M3 3h7v7H3zm11 0h7v7h-7zM3 14h7v7H3zm11 0h7v7h-7z" fill="currentColor"/>
+    </symbol>
+    <symbol id="pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zm8 0h4v16h-4z" fill="currentColor"/></symbol>
+    <symbol id="play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9z" fill="currentColor"/></symbol>
+    <symbol id="new-window" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+        <path d="M7 8H4v12h12v-3"/><rect x="9" y="4" width="11" height="11" rx="1"/>
+      </g>
+    </symbol>
+    <symbol id="code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="bevel"/></symbol>
+    <symbol id="gamepad" viewBox="0 0 24 24">
+      <path d="M6 6h12l2 2 2 9-2 2h-2l-3-3H9l-3 3H4l-2-2 2-9zM5 11h6M8 8v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M15 11h2v2h-2zm3-3h2v2h-2z" fill="currentColor"/>
+    </symbol>
+    <symbol id="terminal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 8 4 4-4 4m7 0h5"/></g></symbol>
+  </svg>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="oiuv 首页">
+        <img src="./assets/companion.svg" width="30" height="30" alt="">
+        <span>oiuv<span class="brand-dot">.</span></span>
+      </a>
+      <div class="topbar-actions">
+        <a class="nav-link" href="#portals">站点入口</a>
+        <button id="motion" class="motion" type="button" aria-label="场景动效" aria-pressed="false" hidden>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><use href="#play"/></svg>
+        </button>
+      </div>
     </div>
+  </header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="intro">
+      <img class="skyline" src="./assets/skyline.webp" width="1920" height="640" alt="" fetchpriority="high">
+      <div class="sky-effects" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="intro">
+        <h1 id="intro"><span class="greeting">你好，我是</span><span class="signature">oiuv<span class="cursor" aria-hidden="true"></span></span></h1>
+        <p>写代码，玩游戏，在文字里走江湖。</p>
+      </div>
+    </section>
+
+    <nav id="portals" aria-labelledby="portals-title" tabindex="-1">
+      <div class="section-head">
+        <svg aria-hidden="true"><use href="#grid"/></svg>
+        <h2 id="portals-title">站点入口</h2>
+      </div>
+      <p id="new-tab-hint" class="visually-hidden">在新窗口打开</p>
+      <div class="cards">
+        <a class="card code-card" href="https://github.com/oiuv" target="_blank" rel="noopener noreferrer" aria-labelledby="code-title" aria-describedby="code-desc new-tab-hint">
+          <div class="cover"><img src="./assets/github.webp" width="848" height="339" alt=""></div>
+          <div class="card-body">
+            <h3 id="code-title"><svg aria-hidden="true"><use href="#code"/></svg>GitHub</h3>
+            <p id="code-desc">逛逛我的开源仓库，看看最近在折腾什么。</p>
+            <span class="destination" aria-hidden="true">github.com/oiuv<svg><use href="#new-window"/></svg></span>
+          </div>
+        </a>
+        <a class="card game-card" href="https://gameivy.com" target="_blank" rel="noopener noreferrer" aria-labelledby="game-title" aria-describedby="game-desc new-tab-hint">
+          <div class="cover"><img src="./assets/gameivy.webp" width="848" height="339" alt=""></div>
+          <div class="card-body">
+            <h3 id="game-title"><svg aria-hidden="true"><use href="#gamepad"/></svg>游戏常春藤</h3>
+            <p id="game-desc">从魔兽世界到魔力宝贝，和老朋友重温经典。</p>
+            <span class="destination" aria-hidden="true">gameivy.com<svg><use href="#new-window"/></svg></span>
+          </div>
+        </a>
+        <a class="card mud-card" href="https://mud.ren" target="_blank" rel="noopener noreferrer" aria-labelledby="mud-title" aria-describedby="mud-desc new-tab-hint">
+          <div class="cover"><img src="./assets/mud.webp" width="848" height="339" alt=""></div>
+          <div class="card-body">
+            <h3 id="mud-title"><svg aria-hidden="true"><use href="#terminal"/></svg>MUD.REN</h3>
+            <p id="mud-desc">逛玩家社区，查 LPC 百科，一起写自己的江湖。</p>
+            <span class="destination" aria-hidden="true">mud.ren<svg><use href="#new-window"/></svg></span>
+          </div>
+        </a>
+      </div>
+    </nav>
+  </main>
+  <footer class="wrap footer">
+    <span>© oiuv<span aria-hidden="true">.</span></span>
+    <span class="footer-art" aria-hidden="true"><i></i><i></i><i></i></span>
+  </footer>
+  <script>
+    const motionButton = document.getElementById('motion');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function setMotion(enabled) {
+      document.documentElement.dataset.motion = enabled ? 'on' : 'off';
+      motionButton.setAttribute('aria-pressed', String(enabled));
+      motionButton.title = enabled ? '暂停场景动效' : '开启场景动效';
+      motionButton.querySelector('use').setAttribute('href', enabled ? '#pause' : '#play');
+    }
+    setMotion(!reducedMotion.matches);
+    motionButton.hidden = false;
+    motionButton.addEventListener('click', () => setMotion(motionButton.getAttribute('aria-pressed') === 'false'));
+    reducedMotion.addEventListener('change', event => setMotion(!event.matches));
+  </script>
 </body>
 </html>
